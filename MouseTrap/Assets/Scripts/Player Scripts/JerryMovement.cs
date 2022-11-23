@@ -1,109 +1,88 @@
-using System;
-using Cinemachine;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
-    public class JerryMovement : MonoBehaviour
+public class JerryMovement : MonoBehaviour
+{
+    //Alternate: public Transform groundCheckTransform = null;
+    [SerializeField] private Transform groundCheckTransform = null;
+    [SerializeField] private LayerMask playerMask;
+    //[SerializeField] private CharacterController controller;
+    private bool jumpKeyPressed;
+    private float horizontalInput;
+    private float verticalInput;
+    public float speed = 1.5f;
+    private Rigidbody rigidbodyComponent;
+
+
+    public new Transform camera;
+
+
+    // Start is called before the first frame update
+    void Start()
     {
-        [Header("Movement")]
-        public float speed;
+        rigidbodyComponent = GetComponent<Rigidbody>();
+    }
 
-        public float groundDrag;
-        
-        public float jumpForce;
-        public float jumpCooldown;
-        public bool canJump;
-        
-        [Header("keybinds")]
-        public KeyCode jumpKey;
-        
-        [Header("Ground Check")]
-        public float playerHeight;
-        public LayerMask groundLayer;
-        bool isGrounded;
-        
+    // Update is called once per frame
+    void Update()
+    {
 
-        [SerializeField] private Transform LookAt;
-
-        public Transform orientation;
-        
-        float horizontalInput;
-        float verticalInput;
-        
-        Vector3 moveDirection;
-        
-        Rigidbody rb;
-        
-        CinemachineVirtualCamera camera;
-
-        private void Start()
+        if (Input.GetKeyDown(KeyCode.Space) == true)
         {
-            rb = GetComponent<Rigidbody>();
-            camera = GameObject.Find("CM FreeLook1").GetComponent<CinemachineVirtualCamera>();
-            rb.freezeRotation = true;
-        }
-        
-        private void Update()
-        {
-            isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundLayer);
-            MyInput();
-            SpeedControl();
+            //Print statement
+            //Debug.Log("Space key was pressed.");
 
-            if (isGrounded)
-            {
-                rb.drag = groundDrag;
-            }
-            else
-            {
-                rb.drag = 0.1f;
-            }
-        }
-        
-        private void FixedUpdate()
-        {
-            MovePlayer();
-        }
-        
-        private void MyInput()
-        {
-            horizontalInput = Input.GetAxisRaw("Horizontal");
-            verticalInput = Input.GetAxisRaw("Vertical");
-            
-            if(Input.GetKeyDown(jumpKey) && isGrounded && canJump)
-            {
-                Jump();
-            }
-
-            moveDirection = (orientation.forward * verticalInput) + (orientation.right * horizontalInput);
-            moveDirection.Normalize();
+            jumpKeyPressed = true;
         }
 
-        private void MovePlayer()
-        {
-            moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-            
-            rb.AddForce(moveDirection.normalized * speed * 10f, ForceMode.Force);
-        }
-        
-        private void SpeedControl()
-        {
-            if (rb.velocity.magnitude > speed)
-            {
-                rb.velocity = rb.velocity.normalized * speed;
-            }
-        }
-        
-        private void Jump()
-        {
-            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            canJump = false;
-            Invoke(nameof(ResetJump), jumpCooldown);
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
 
-        }
-        
-        private void ResetJump()
+        //Free movement with camera
+        Vector3 input = new Vector3(horizontalInput, 0, verticalInput).normalized;
+        float cameraRot = Camera.main.transform.rotation.eulerAngles.y;
+        rigidbodyComponent.position += Quaternion.Euler(0, cameraRot, 0) * input * speed * Time.deltaTime;
+
+        //Attempted Rotation
+        if (input.magnitude >= 0.1f)
         {
-            canJump = true;
+            float targetAngle = Mathf.Atan2(input.x, input.z) * Mathf.Rad2Deg + cameraRot;
+            transform.rotation = Quaternion.Euler(0, targetAngle, 0);
+        }
+
+
+
+        //Checks for collision on the character's feet to allow for jumps
+        if (Physics.OverlapSphere(groundCheckTransform.position, 1.0f, playerMask).Length == 0)
+        {
+            jumpKeyPressed = false;
+            //Increases speed mid air
+            //rigidbodyComponent.velocity = new Vector3(horizontalInput * 4, rigidbodyComponent.velocity.y, 0);
+            return;
+        }
+
+        //Checks jump
+        if (jumpKeyPressed == true)
+        {
+            //Print statement
+            Debug.Log("Space key was pressed.");
+
+            //Adjusts jump height
+            rigidbodyComponent.AddForce(Vector3.up * 3.5f, ForceMode.Impulse);
+            //Debug.Log(rigidbodyComponent);
+            jumpKeyPressed = false;
         }
     }
+
+    // FixedUpdate is called once every physics update
+    private void FixedUpdate()
+    {
+
+
+
+    }
+}

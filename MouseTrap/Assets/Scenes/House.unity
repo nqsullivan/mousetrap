@@ -1700,7 +1700,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 88665564}
-  m_LocalRotation: {x: 0.017016437, y: -0.00014850272, z: -0.008725294, w: 0.9998172}
+  m_LocalRotation: {x: 0.017016437, y: -0.00014849841, z: -0.008725294, w: 0.9998172}
   m_LocalPosition: {x: 0, y: 0, z: 0.0000009536743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2459,7 +2459,7 @@ GameObject:
   - component: {fileID: 151566376}
   - component: {fileID: 151566375}
   m_Layer: 0
-  m_Name: Puzzle0
+  m_Name: SamplePuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20740,7 +20740,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582093375}
-  m_LocalRotation: {x: 0.017017087, y: -0.000000004300018, z: 7.3184375e-11, w: 0.9998552}
+  m_LocalRotation: {x: 0.017017087, y: 0.000000004300018, z: -7.3184375e-11, w: 0.9998552}
   m_LocalPosition: {x: -25.343, y: 0.621, z: 0.32500005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

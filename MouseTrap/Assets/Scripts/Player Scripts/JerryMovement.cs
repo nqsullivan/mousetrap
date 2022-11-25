@@ -11,15 +11,16 @@ public class JerryMovement : MonoBehaviour
     [SerializeField] private Transform groundCheckTransform = null;
     [SerializeField] private LayerMask playerMask;
     //[SerializeField] private CharacterController controller;
-    private bool jumpKeyPressed;
+    public bool jumpKeyPressed;
     private float horizontalInput;
     private float verticalInput;
     public float speed = 1.5f;
     private Rigidbody rigidbodyComponent;
+    public float jumpheight = 2.0f;
 
 
     public new Transform camera;
-    bool jumpReady = false;
+    public bool jumpReady = false;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,7 @@ public class JerryMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         if (Input.GetKeyDown(KeyCode.Space) == true)
@@ -72,24 +73,19 @@ public class JerryMovement : MonoBehaviour
             Debug.Log("Space key was pressed.");
 
             //Adjusts jump height
-            rigidbodyComponent.AddForce(Vector3.up * 3.5f, ForceMode.Impulse);
-            //Debug.Log(rigidbodyComponent);
-            jumpReady = false;
-            jumpKeyPressed = false;
+            rigidbodyComponent.AddForce(Vector3.up * jumpheight, ForceMode.Impulse);
+            //Debug.Log(rigidbodyComponent)
+
+            //jumpKeyPressed = false;
+            return;
         }
     }
 
-    // FixedUpdate is called once every physics update
-    private void FixedUpdate()
-    {
-
-
-
-    }
+   
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 8)
+        if (other.gameObject.layer == 8 || other.gameObject.layer == 7)
         {
             jumpReady = true;
             jumpKeyPressed = false;
@@ -98,10 +94,10 @@ public class JerryMovement : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 8)
+        if (other.gameObject.layer == 8 || other.gameObject.layer == 7)
         {
             jumpReady = false;
-            jumpKeyPressed = false;
         }
+        
     }
 }

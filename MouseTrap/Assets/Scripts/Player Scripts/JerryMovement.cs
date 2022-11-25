@@ -19,7 +19,7 @@ public class JerryMovement : MonoBehaviour
 
 
     public new Transform camera;
-
+    bool jumpReady = false;
 
     // Start is called before the first frame update
     void Start()
@@ -66,7 +66,7 @@ public class JerryMovement : MonoBehaviour
         }
 
         //Checks jump
-        if (jumpKeyPressed == true)
+        if (jumpKeyPressed == true && jumpReady)
         {
             //Print statement
             Debug.Log("Space key was pressed.");
@@ -74,6 +74,7 @@ public class JerryMovement : MonoBehaviour
             //Adjusts jump height
             rigidbodyComponent.AddForce(Vector3.up * 3.5f, ForceMode.Impulse);
             //Debug.Log(rigidbodyComponent);
+            jumpReady = false;
             jumpKeyPressed = false;
         }
     }
@@ -84,5 +85,23 @@ public class JerryMovement : MonoBehaviour
 
 
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 8)
+        {
+            jumpReady = true;
+            jumpKeyPressed = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == 8)
+        {
+            jumpReady = false;
+            jumpKeyPressed = false;
+        }
     }
 }

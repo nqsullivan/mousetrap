@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43648693, g: 0.4748904, b: 0.5149217, a: 1}
+  m_IndirectSpecularColor: {r: 0.4363379, g: 0.47472608, b: 0.51473933, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -713,6 +713,7 @@ GameObject:
   - component: {fileID: 41122693}
   - component: {fileID: 41122692}
   - component: {fileID: 41122691}
+  - component: {fileID: 41122696}
   m_Layer: 0
   m_Name: Jerry
   m_TagString: Untagged
@@ -835,6 +836,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 41122689}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &41122696
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41122689}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.063406974, z: 1}
+  m_Center: {x: 0, y: -1.0104688, z: 0}
 --- !u!4 &44420511 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5820956380439161571, guid: f072b6d5974d6a14da67d1db1cd20b92, type: 3}
@@ -1700,7 +1714,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 88665564}
-  m_LocalRotation: {x: 0.017016437, y: -0.00014849841, z: -0.008725294, w: 0.9998172}
+  m_LocalRotation: {x: 0.017016437, y: -0.00014850164, z: -0.008725294, w: 0.9998172}
   m_LocalPosition: {x: 0, y: 0, z: 0.0000009536743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3162,13 +3176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b533d8a414f62488fa7196a29b9c09bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: {fileID: 0}
-  player: {fileID: 0}
-  playerObject: {fileID: 0}
-  rb: {fileID: 0}
-  lookAt: {fileID: 0}
-  FreeLook: {fileID: 196461318}
-  rotationSpeed: 30
 --- !u!4 &197851720 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4693190733790175638, guid: af872b04269986143906a126ca9ff444, type: 3}
@@ -7191,6 +7198,10 @@ PrefabInstance:
     - target: {fileID: 5921126462729676309, guid: bee09117d2231334d90a559b1ff7f323, type: 3}
       propertyPath: m_Name
       value: Int_apt_01_Floor_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921126462729676309, guid: bee09117d2231334d90a559b1ff7f323, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5921126462729676309, guid: bee09117d2231334d90a559b1ff7f323, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -16525,7 +16536,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204240563}
-  m_LocalRotation: {x: 0.11862603, y: -0.0010352406, z: -0.008664933, w: 0.9929006}
+  m_LocalRotation: {x: 0.11862603, y: -0.0010352407, z: -0.008664933, w: 0.9929007}
   m_LocalPosition: {x: 0, y: 0, z: 0.0000009536743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -20740,7 +20751,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582093375}
-  m_LocalRotation: {x: 0.017017087, y: 0.000000004300018, z: -7.3184375e-11, w: 0.9998552}
+  m_LocalRotation: {x: 0.017017087, y: -0.000000002150009, z: 3.6592188e-11, w: 0.9998552}
   m_LocalPosition: {x: -25.343, y: 0.621, z: 0.32500005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -22163,7 +22174,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1698037218}
-  m_LocalRotation: {x: 0.16464737, y: -0.0014368594, z: -0.008607453, w: 0.9863139}
+  m_LocalRotation: {x: 0.16464739, y: -0.0014368595, z: -0.008607453, w: 0.9863139}
   m_LocalPosition: {x: 0, y: 0, z: 0.0000009536743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

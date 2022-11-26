@@ -16,7 +16,7 @@ public class JerryMovement : MonoBehaviour
     private float verticalInput;
     public float speed = 1.5f;
     private Rigidbody rigidbodyComponent;
-    public float jumpheight = 2.0f;
+    public float jumpheight = 0.4f;
 
 
     public new Transform camera;
@@ -55,16 +55,21 @@ public class JerryMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, targetAngle, 0);
         }
 
-
+        Debug.Log("Mask: " + Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length);
 
         //Checks for collision on the character's feet to allow for jumps
-        //if (Physics.OverlapSphere(groundCheckTransform.position, 1.0f, playerMask).Length == 0)
-        //{
-        //    jumpKeyPressed = false;
-        //    //Increases speed mid air
-        //    //rigidbodyComponent.velocity = new Vector3(horizontalInput * 4, rigidbodyComponent.velocity.y, 0);
-        //    return;
-        //}
+        if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length == 0)
+        {
+            jumpKeyPressed = false;
+            //Increases speed mid air
+            //rigidbodyComponent.velocity = new Vector3(horizontalInput * 4, rigidbodyComponent.velocity.y, 0);
+            return;
+        }
+
+        if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length > 0)
+        {
+            jumpReady = true;
+        }
 
         //Checks jump
         if (jumpKeyPressed == true && jumpReady)

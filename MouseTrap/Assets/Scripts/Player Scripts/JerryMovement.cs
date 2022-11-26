@@ -55,7 +55,7 @@ public class JerryMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, targetAngle, 0);
         }
 
-        Debug.Log("Mask: " + Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length);
+        //Debug.Log("Mask: " + Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length);
 
         //Checks for collision on the character's feet to allow for jumps
         if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length == 0)
@@ -75,7 +75,7 @@ public class JerryMovement : MonoBehaviour
         if (jumpKeyPressed == true && jumpReady)
         {
             //Print statement
-            Debug.Log("Space key was pressed.");
+            //Debug.Log("Space key was pressed.");
 
             //Adjusts jump height
             rigidbodyComponent.AddForce(Vector3.up * jumpheight, ForceMode.Impulse);

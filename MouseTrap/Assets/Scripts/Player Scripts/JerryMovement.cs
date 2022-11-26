@@ -58,13 +58,13 @@ public class JerryMovement : MonoBehaviour
 
 
         //Checks for collision on the character's feet to allow for jumps
-        if (Physics.OverlapSphere(groundCheckTransform.position, 1.0f, playerMask).Length == 0)
-        {
-            jumpKeyPressed = false;
-            //Increases speed mid air
-            //rigidbodyComponent.velocity = new Vector3(horizontalInput * 4, rigidbodyComponent.velocity.y, 0);
-            return;
-        }
+        //if (Physics.OverlapSphere(groundCheckTransform.position, 1.0f, playerMask).Length == 0)
+        //{
+        //    jumpKeyPressed = false;
+        //    //Increases speed mid air
+        //    //rigidbodyComponent.velocity = new Vector3(horizontalInput * 4, rigidbodyComponent.velocity.y, 0);
+        //    return;
+        //}
 
         //Checks jump
         if (jumpKeyPressed == true && jumpReady)
@@ -85,7 +85,7 @@ public class JerryMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 8 || other.gameObject.layer == 7)
+        if (other.gameObject.layer == 8 || other.gameObject.layer == 0)
         {
             jumpReady = true;
             jumpKeyPressed = false;
@@ -94,10 +94,9 @@ public class JerryMovement : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 8 || other.gameObject.layer == 7)
-        {
+        
             jumpReady = false;
-        }
+        
         
     }
 }

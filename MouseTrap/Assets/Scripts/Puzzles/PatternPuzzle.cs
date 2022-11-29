@@ -22,14 +22,16 @@ public class PatternPuzzle : Puzzle
         button1.onClick.AddListener(() =>
         {
             Debug.Log("Button 1 Clicked");
-            fail();
+            EndPuzzle(false);
+            miniGameCanvas.gameObject.SetActive(false);
             
         });
 
         button2.onClick.AddListener(() =>
         {
             Debug.Log("Button 2 Clicked");
-            fail();
+            EndPuzzle(false);
+            miniGameCanvas.gameObject.SetActive(false);
 
         });
 
@@ -37,32 +39,18 @@ public class PatternPuzzle : Puzzle
         button3.onClick.AddListener(() =>
         {
             Debug.Log("Button 3 Clicked");
-            success();
+            EndPuzzle(true);
+            miniGameCanvas.gameObject.SetActive(false);
 
         });
 
         button4.onClick.AddListener(() =>
         {
             Debug.Log("Button 4 Clicked");
-            fail();
+            EndPuzzle(false);
+            miniGameCanvas.gameObject.SetActive(false);
 
         });
 
     }
-
-    public void success()
-    {
-        
-        Debug.Log("User won the minigame");
-        miniGameCanvas.gameObject.SetActive(false);
-    }
-
-    public void fail()
-    {
-        Debug.Log("User Failed minigame");
-        miniGameCanvas.gameObject.SetActive(false);
-
-    }
-
-    
 }

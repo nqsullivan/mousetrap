@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /**
  * This singleton class is used to manage the game
@@ -7,10 +9,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; } // Singleton instance
 
-    public static bool isRunning = true; // True when not paused, game over, or in main menu
-    public static bool inPuzzle = false; // True when in a puzzle
+    public bool isRunning = false; // True when not paused, game over, or in main menu
+    public bool inPuzzle = false; // True when in a puzzle
     
-    public static int score = 0; // Score = num of puzzles solved
+    public int score = 0; // Score = num of puzzles solved
+    public int lives = 3;
+
+    public Image pauseMenu;
+    public Image mainMenu;
+    public Image gameOverScreen;
 
     /**
      * This method is called when the script instance is being loaded and is used to initialize the singleton instance
@@ -32,16 +39,36 @@ public class GameManager : MonoBehaviour
     }
 
     /**
+     * This method is called every frame and is used for input
+     * @return void
+     * @author Nathaniel Sullivan
+     * @version November 28th 2022
+     */
+    private void Update()
+    {
+        // Handle P key
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (isRunning)
+            {
+                Pause();
+            }
+            else
+            {
+                Resume();
+            }
+        }
+    }
+
+    /**
      * This method is called when the script is first loaded and initializes the main menu
      * @return void
      * @author Nathaniel Sullivan
-     * @version November 24th 2022
+     * @version November 28th 2022
      */
     void Start()
     {
-        // TODO: Setup the main menu
-        Debug.Log("Starting the game");
-        StartGame(); // We can remove this later when we have a main menu
+        
     }
     
     /**
@@ -52,9 +79,7 @@ public class GameManager : MonoBehaviour
      */
     public void StartGame()
     {
-        // TODO: Start the game should be called from the main menu
         isRunning = true;
-        
         // Hide mouse cursor and lock it to the center of the screen
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -68,7 +93,8 @@ public class GameManager : MonoBehaviour
      */
     public void GameOver()
     {
-        // TODO: Setup Game Over Screen
+        SetIsRunning(false);
+        gameOverScreen.gameObject.SetActive(true);
     }
 
     /**
@@ -91,17 +117,6 @@ public class GameManager : MonoBehaviour
     public void IncrementScore()
     {
         score++;
-    }
-    
-    /**
-     * A method to get if the game is running
-     * @return bool
-     * @author Nathaniel Sullivan
-     * @version November 24th 2022
-     */
-    public bool IsRunning()
-    {
-        return isRunning;
     }
     
     /**
@@ -135,5 +150,54 @@ public class GameManager : MonoBehaviour
     public bool IsInPuzzle()
     {
         return inPuzzle;
+    }
+
+    /**
+     * A method to pause the game
+     * @author Nathaniel Sullivan
+     * @version November 28th 2022
+     */
+    public void Pause()
+    {
+        SetIsRunning(false);
+        pauseMenu.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    /**
+     * A method to resume the game from a Pause
+     * @author Nathaniel Sullivan
+     * @version November 28th 2022
+     */
+    public void Resume()
+    {
+        SetIsRunning(true);
+        pauseMenu.gameObject.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void SetIsRunning(bool b)
+    {
+        isRunning = b;
+    }
+
+    public void RestartGame()
+    {
+        // Restart the game
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void DecrementLives()
+    {
+        if (lives > 1)
+        {
+            lives--;
+        }
+        else
+        {
+            GameOver();
+        }
     }
 }

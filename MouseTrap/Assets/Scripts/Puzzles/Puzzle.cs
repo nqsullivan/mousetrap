@@ -48,7 +48,7 @@ public abstract class Puzzle : MonoBehaviour
      */
     private void Update()
     {
-        if (_inRange && GameManager.Instance.IsRunning())
+        if (_inRange && GameManager.Instance.isRunning)
         {
             gameObject.GetComponent<Renderer>().material.color = Color.green;
             if (Input.GetKeyDown(KeyCode.E))

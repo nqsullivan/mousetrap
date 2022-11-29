@@ -55,12 +55,14 @@ public class PatternPuzzle : Puzzle
         
         Debug.Log("User won the minigame");
         miniGameCanvas.gameObject.SetActive(false);
+        EndPuzzle(true);
     }
 
     public void fail()
     {
         Debug.Log("User Failed minigame");
         miniGameCanvas.gameObject.SetActive(false);
+        EndPuzzle(false);
 
     }
 

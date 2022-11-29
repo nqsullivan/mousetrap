@@ -163,6 +163,7 @@ public class AIController : MonoBehaviour
     void CaughtPlayer()
     {
         m_CaughtPlayer = true;
+        GameManager.Instance.DecrementLives();
     }
 
     void LookingPlayer(Vector3 player)

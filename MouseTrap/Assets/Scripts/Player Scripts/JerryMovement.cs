@@ -31,58 +31,60 @@ public class JerryMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        if (Input.GetKeyDown(KeyCode.Space) == true)
+        if (!GameManager.Instance.IsInPuzzle() && GameManager.Instance.isRunning)
         {
-            //Print statement
-            //Debug.Log("Space key was pressed.");
+            if (Input.GetKeyDown(KeyCode.Space) == true)
+            {
+                //Print statement
+                //Debug.Log("Space key was pressed.");
 
-            jumpKeyPressed = true;
-        }
+                jumpKeyPressed = true;
+            }
 
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+            horizontalInput = Input.GetAxis("Horizontal");
+            verticalInput = Input.GetAxis("Vertical");
 
-        //Free movement with camera
-        Vector3 input = new Vector3(horizontalInput, 0, verticalInput).normalized;
-        float cameraRot = Camera.main.transform.rotation.eulerAngles.y;
-        rigidbodyComponent.position += Quaternion.Euler(0, cameraRot, 0) * input * speed * Time.deltaTime;
+            //Free movement with camera
+            Vector3 input = new Vector3(horizontalInput, 0, verticalInput).normalized;
+            float cameraRot = Camera.main.transform.rotation.eulerAngles.y;
+            rigidbodyComponent.position += Quaternion.Euler(0, cameraRot, 0) * input * speed * Time.deltaTime;
 
-        //Attempted Rotation
-        if (input.magnitude >= 0.1f)
-        {
-            float targetAngle = Mathf.Atan2(input.x, input.z) * Mathf.Rad2Deg + cameraRot;
-            transform.rotation = Quaternion.Euler(0, targetAngle, 0);
-        }
+            //Attempted Rotation
+            if (input.magnitude >= 0.1f)
+            {
+                float targetAngle = Mathf.Atan2(input.x, input.z) * Mathf.Rad2Deg + cameraRot;
+                transform.rotation = Quaternion.Euler(0, targetAngle, 0);
+            }
 
-        //Debug.Log("Mask: " + Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length);
+            //Debug.Log("Mask: " + Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length);
 
-        //Checks for collision on the character's feet to allow for jumps
-        if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length == 0)
-        {
-            jumpKeyPressed = false;
-            //Increases speed mid air
-            //rigidbodyComponent.velocity = new Vector3(horizontalInput * 4, rigidbodyComponent.velocity.y, 0);
-            return;
-        }
+            //Checks for collision on the character's feet to allow for jumps
+            if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length == 0)
+            {
+                jumpKeyPressed = false;
+                //Increases speed mid air
+                //rigidbodyComponent.velocity = new Vector3(horizontalInput * 4, rigidbodyComponent.velocity.y, 0);
+                return;
+            }
 
-        if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length > 0)
-        {
-            jumpReady = true;
-        }
+            if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length > 0)
+            {
+                jumpReady = true;
+            }
 
-        //Checks jump
-        if (jumpKeyPressed == true && jumpReady)
-        {
-            //Print statement
-            //Debug.Log("Space key was pressed.");
+            //Checks jump
+            if (jumpKeyPressed == true && jumpReady)
+            {
+                //Print statement
+                //Debug.Log("Space key was pressed.");
 
-            //Adjusts jump height
-            rigidbodyComponent.AddForce(Vector3.up * jumpheight, ForceMode.Impulse);
-            //Debug.Log(rigidbodyComponent)
+                //Adjusts jump height
+                rigidbodyComponent.AddForce(Vector3.up * jumpheight, ForceMode.Impulse);
+                //Debug.Log(rigidbodyComponent)
 
-            //jumpKeyPressed = false;
-            return;
+                //jumpKeyPressed = false;
+                return;
+            }
         }
     }
 

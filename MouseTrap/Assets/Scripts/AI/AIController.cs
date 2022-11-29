@@ -32,7 +32,9 @@ public class AIController : MonoBehaviour
     bool m_playerInRange;                           
     bool m_PlayerNear;                              
     bool m_IsPatrol;                                
-    bool m_CaughtPlayer;                            
+    bool m_CaughtPlayer;
+
+    public GameObject jerryspawn;
 
     void Start()
     {
@@ -64,6 +66,8 @@ public class AIController : MonoBehaviour
         {
             Patroling();
         }
+
+        
     }
 
     private void Chasing()
@@ -94,7 +98,9 @@ public class AIController : MonoBehaviour
                     Stop();
                 m_WaitTime -= Time.deltaTime;
             }
+
         }
+
     }
 
     private void Patroling()
@@ -162,8 +168,11 @@ public class AIController : MonoBehaviour
 
     void CaughtPlayer()
     {
+        Debug.Log("Caught player");
         m_CaughtPlayer = true;
         GameManager.Instance.DecrementLives();
+        
+
     }
 
     void LookingPlayer(Vector3 player)
@@ -218,5 +227,21 @@ public class AIController : MonoBehaviour
             }
         }
     }
+
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 6)
+        {
+            CaughtPlayer();
+            GameManager.Instance.resetGame();
+        }
+
+    }
+
+    
+
+
 
 }

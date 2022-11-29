@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
     public int lives = 3;
 
     public Image pauseMenu;
-    public Image mainMenu;
-    public Image gameOverScreen;
+    public GameObject mainMenu;
+    public GameObject gameOverScreen;
 
     /**
      * This method is called when the script instance is being loaded and is used to initialize the singleton instance
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         SetIsRunning(false);
-        gameOverScreen.gameObject.SetActive(true);
+        gameOverScreen.SetActive(true);
     }
 
     /**
@@ -199,5 +199,10 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
         }
+    }
+
+    public void resetGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

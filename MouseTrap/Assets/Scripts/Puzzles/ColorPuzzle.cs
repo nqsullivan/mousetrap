@@ -34,10 +34,10 @@ public class ColorPuzzle : Puzzle
 
         for (int index = 0; index < numOfTilesToClick; index++)
         {
-            int randNum = gen.Next(TOTAL_TILES);
+            int randNum = gen.Next(TOTAL_TILES) + 1;
             while (indices.Contains(randNum))
             {
-                randNum = gen.Next(TOTAL_TILES);
+                randNum = gen.Next(TOTAL_TILES) + 1;
             }
             indices.Add(randNum);
             Debug.Log("Index of Color Puzzle: " + randNum);

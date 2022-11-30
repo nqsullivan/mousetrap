@@ -1,12 +1,12 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour
+public class WinMenu : MonoBehaviour
 {
     public void Setup()
     {
-        Debug.Log("Activating the Pause Screen");
+        Debug.Log("Activating the Win Screen");
         gameObject.SetActive(true);
     }
     
@@ -16,9 +16,8 @@ public class PauseMenu : MonoBehaviour
         GameManager.Instance.Start();
     }
     
-    public void ResumeGame()
+    public void Quit()
     {
-        GameManager.Instance.Resume();
-        gameObject.SetActive(false);
+        GameManager.Instance.QuitGame();
     }
 }

@@ -3360,7 +3360,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2055564065844680467}
   - {fileID: 3712698610180919362}
   - {fileID: 8185344306113560598}
   - {fileID: 5973137602189945958}
@@ -3370,6 +3369,7 @@ RectTransform:
   - {fileID: 1306004141098344286}
   - {fileID: 9208051060407411208}
   - {fileID: 4017312193015488369}
+  - {fileID: 2055564065844680467}
   - {fileID: 95713568792980022}
   - {fileID: 4271711601111628900}
   m_Father: {fileID: 8919801112710084436}
@@ -3810,7 +3810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3137888607015258439, guid: 80e5f1265378b45f6912105f4f654ff5, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3137888607015258439, guid: 80e5f1265378b45f6912105f4f654ff5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3884,6 +3884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e5effd50cff54c8ca8ae99db47a5b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  miniGameCanvas: {fileID: 0}
   b0: {fileID: 0}
   b1: {fileID: 0}
   b2: {fileID: 0}

@@ -83,7 +83,7 @@ public class AIController : MonoBehaviour
         }
         if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)    
         {
-            if (m_WaitTime <= 0 && !m_CaughtPlayer && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 6f)
+            if (m_WaitTime <= 0 && !m_CaughtPlayer && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Jerry").transform.position) >= 6f)
             {
                 m_IsPatrol = true;
                 m_PlayerNear = false;
@@ -94,7 +94,7 @@ public class AIController : MonoBehaviour
             }
             else
             {
-                if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 2.5f)
+                if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Jerry").transform.position) >= 2.5f)
                     Stop();
                 m_WaitTime -= Time.deltaTime;
             }
@@ -171,8 +171,6 @@ public class AIController : MonoBehaviour
         Debug.Log("Caught player");
         m_CaughtPlayer = true;
         GameManager.Instance.DecrementLives();
-        
-
     }
 
     void LookingPlayer(Vector3 player)
@@ -235,7 +233,6 @@ public class AIController : MonoBehaviour
         if (other.gameObject.layer == 6)
         {
             CaughtPlayer();
-            GameManager.Instance.resetGame();
         }
 
     }

@@ -2,16 +2,20 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayGame()
+    public void Setup()
     {
-        Debug.Log("Pressed Play");
+        Debug.Log("Activating the MainMenu Screen");
+        gameObject.SetActive(true);
+    }
+    
+    public void StartGame()
+    {
         GameManager.Instance.StartGame();
         gameObject.SetActive(false);
     }
-
+    
     public void QuitGame()
     {
-        Application.Quit();
+        GameManager.Instance.QuitGame();
     }
-    
 }

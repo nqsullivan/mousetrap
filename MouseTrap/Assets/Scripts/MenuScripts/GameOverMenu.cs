@@ -1,12 +1,11 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour
+public class GameOverMenu : MonoBehaviour
 {
     public void Setup()
     {
-        Debug.Log("Activating the Pause Screen");
+        Debug.Log("Activating the Game Over Screen");
         gameObject.SetActive(true);
     }
     
@@ -16,9 +15,8 @@ public class PauseMenu : MonoBehaviour
         GameManager.Instance.Start();
     }
     
-    public void ResumeGame()
+    public void QuitGame()
     {
-        GameManager.Instance.Resume();
-        gameObject.SetActive(false);
+        GameManager.Instance.QuitGame();
     }
 }

@@ -12,12 +12,14 @@ public class GameManager : MonoBehaviour
     public bool isRunning = false; // True when not paused, game over, or in main menu
     public bool inPuzzle = false; // True when in a puzzle
     
+    public int numberOfPuzzles = 4; // Number of puzzles in the game
     public int score = 0; // Score = num of puzzles solved
     public int lives = 3;
 
-    public Image pauseMenu;
-    public GameObject mainMenu;
-    public GameObject gameOverScreen;
+    public PauseMenu pauseMenu;
+    public MainMenu mainMenu;
+    public GameOverMenu gameOverMenu;
+    public WinMenu winMenu;
 
     /**
      * This method is called when the script instance is being loaded and is used to initialize the singleton instance
@@ -27,14 +29,13 @@ public class GameManager : MonoBehaviour
      */
     void Awake()
     {
-        if (Instance == null)
+        if(Instance != null && Instance != this)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            Destroy(this);
         }
         else
         {
-            Destroy(gameObject);
+            Instance = this;
         }
     }
 
@@ -66,9 +67,10 @@ public class GameManager : MonoBehaviour
      * @author Nathaniel Sullivan
      * @version November 28th 2022
      */
-    void Start()
+    public void Start()
     {
-        
+        Debug.Log("Start");
+        mainMenu.Setup();
     }
     
     /**
@@ -94,7 +96,9 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         SetIsRunning(false);
-        gameOverScreen.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        gameOverMenu.Setup();
     }
 
     /**
@@ -105,7 +109,10 @@ public class GameManager : MonoBehaviour
      */
     public void Win()
     {
-        // TODO: Setup Win Screen
+        SetIsRunning(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        winMenu.Setup();
     }
     
     /**
@@ -116,7 +123,15 @@ public class GameManager : MonoBehaviour
      */
     public void IncrementScore()
     {
-        score++;
+        Debug.Log("Incrementing Score to " + (score + 1) + " out of " + numberOfPuzzles);
+        if(score + 1 >= numberOfPuzzles)
+        {
+            Win();
+        }
+        else
+        {
+            score++;
+        }
     }
     
     /**
@@ -201,8 +216,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void resetGame()
+    public void QuitGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Application.Quit();
     }
 }

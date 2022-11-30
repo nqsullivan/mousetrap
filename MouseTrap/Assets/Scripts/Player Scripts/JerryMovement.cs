@@ -44,6 +44,13 @@ public class JerryMovement : MonoBehaviour
             horizontalInput = Input.GetAxis("Horizontal");
             verticalInput = Input.GetAxis("Vertical");
 
+            if(horizontalInput == 0 && verticalInput == 0)
+            {
+                rigidbodyComponent.freezeRotation = true;
+                rigidbodyComponent.velocity = new Vector3(0, rigidbodyComponent.velocity.y, 0);
+                
+            }
+
             //Free movement with camera
             Vector3 input = new Vector3(horizontalInput, 0, verticalInput).normalized;
             float cameraRot = Camera.main.transform.rotation.eulerAngles.y;

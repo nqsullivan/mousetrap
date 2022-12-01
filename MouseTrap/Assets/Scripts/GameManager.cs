@@ -48,6 +48,12 @@ public class GameManager : MonoBehaviour
      */
     private void Update()
     {
+        if (inPuzzle)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        
         // Handle P key
         if (Input.GetKeyDown(KeyCode.P))
         {

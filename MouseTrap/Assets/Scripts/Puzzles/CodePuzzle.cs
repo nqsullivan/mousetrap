@@ -27,6 +27,20 @@ public class CodePuzzle : Puzzle
     {
         miniGameCanvas.gameObject.SetActive(true);
         
+        b0.onClick.RemoveAllListeners();
+        b1.onClick.RemoveAllListeners();
+        b2.onClick.RemoveAllListeners();
+        b3.onClick.RemoveAllListeners();
+        b4.onClick.RemoveAllListeners();
+        b5.onClick.RemoveAllListeners();
+        b6.onClick.RemoveAllListeners();
+        b7.onClick.RemoveAllListeners();
+        b8.onClick.RemoveAllListeners();
+        b9.onClick.RemoveAllListeners();
+        
+        bClear.onClick.RemoveAllListeners();
+        bEnter.onClick.RemoveAllListeners();
+
         b0.onClick.AddListener(() => { inputCode.text += "0"; });
         b1.onClick.AddListener(() => { inputCode.text += "1"; });
         b2.onClick.AddListener(() => { inputCode.text += "2"; });

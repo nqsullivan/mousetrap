@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     
     public int numberOfPuzzles = 4; // Number of puzzles in the game
     public int score = 0; // Score = num of puzzles solved
-    public int lives = 3;
+    public int lives = 1;
 
     public PauseMenu pauseMenu;
     public MainMenu mainMenu;

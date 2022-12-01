@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public MainMenu mainMenu;
     public GameOverMenu gameOverMenu;
     public WinMenu winMenu;
+    public GameObject gameOverlay;
 
     /**
      * This method is called when the script instance is being loaded and is used to initialize the singleton instance
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
     {
         isRunning = true;
         // Hide mouse cursor and lock it to the center of the screen
+        gameOverlay.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -95,6 +97,7 @@ public class GameManager : MonoBehaviour
      */
     public void GameOver()
     {
+        gameOverlay.SetActive(false);
         SetIsRunning(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -109,6 +112,7 @@ public class GameManager : MonoBehaviour
      */
     public void Win()
     {
+        gameOverlay.SetActive(false);
         SetIsRunning(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -143,13 +147,15 @@ public class GameManager : MonoBehaviour
      */
     public void SetInPuzzle(bool b)
     {
-        if(b)
+        if (b)
         {
+            gameOverlay.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
         else
         {
+            gameOverlay.SetActive(true);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -174,6 +180,7 @@ public class GameManager : MonoBehaviour
      */
     public void Pause()
     {
+        gameOverlay.SetActive(false);
         SetIsRunning(false);
         pauseMenu.gameObject.SetActive(true);
         Cursor.lockState = CursorLockMode.None;

@@ -19,6 +19,7 @@ public class AIController : MonoBehaviour
     public float meshResolution = 1.0f;             
     public int edgeIterations = 4;                  
     public float edgeDistance = 0.5f;               
+    public Animator animator;
 
 
     public Transform[] waypoints;                   
@@ -53,11 +54,32 @@ public class AIController : MonoBehaviour
 
         navMeshAgent.isStopped = false;
         navMeshAgent.speed = speedWalk;             
-        navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);    
+        navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+
+        animator.enabled = true;
+        // Set animator state to idle_a
+        animator.Play("Idle_A");
+        Debug.Log("Setting animator to Idle_A");
     }
 
     private void Update()
     {
+        // Print the name of the current state of the animator
+        // AnimatorStateInfo currentStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        // if(currentStateInfo.IsName("Idle_A") || currentStateInfo.IsName("Idle_B"))
+        // {
+        //     Debug.Log("Idle");
+        // }
+        // else if (currentStateInfo.IsName("Walk") || currentStateInfo.IsName("Walk 0") ||
+        //          currentStateInfo.IsName("Walk 1"))
+        // {
+        //     Debug.Log("Walk");
+        // } else if (currentStateInfo.IsName("Run") || currentStateInfo.IsName("Run 0") ||
+        //            currentStateInfo.IsName("Run 1"))
+        // {
+        //     Debug.Log("Run");
+        // }
+        
         EnviromentView();                       
 
         if (!m_IsPatrol)
@@ -74,6 +96,8 @@ public class AIController : MonoBehaviour
 
     private void Chasing()
     {
+        animator.Play("Run");
+        Debug.Log("Setting animator to Run");
         
         m_PlayerNear = false;                       
         playerLastPosition = Vector3.zero;          
@@ -113,11 +137,14 @@ public class AIController : MonoBehaviour
             if (m_TimeToRotate <= 0)
             {
                 Move(speedWalk);
+                animator.Play("Walk");
+                Debug.Log("Setting animator to Walk");
                 LookingPlayer(playerLastPosition);
             }
             else
             {
-                
+                animator.Play("Idle_A");
+                Debug.Log("Setting animator to Idle_A");
                 Stop();
                 m_TimeToRotate -= Time.deltaTime;
             }
@@ -134,10 +161,14 @@ public class AIController : MonoBehaviour
                 {
                     NextPoint();
                     Move(speedWalk);
+                    animator.Play("Walk");
+                    Debug.Log("Setting animator to Walk");
                     m_WaitTime = startWaitTime;
                 }
                 else
                 {
+                    animator.Play("Idle_A");
+                    Debug.Log("Setting animator to Idle_A");
                     Stop();
                     m_WaitTime -= Time.deltaTime;
                 }
@@ -238,9 +269,4 @@ public class AIController : MonoBehaviour
         }
 
     }
-
-    
-
-
-
 }

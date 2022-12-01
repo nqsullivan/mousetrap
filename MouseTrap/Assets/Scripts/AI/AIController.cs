@@ -38,6 +38,8 @@ public class AIController : MonoBehaviour
 
     void Start()
     {
+        navMeshAgent.height = 0.5f;
+        navMeshAgent.baseOffset = 0;
         m_PlayerPosition = Vector3.zero;
         m_IsPatrol = true;
         m_CaughtPlayer = false;

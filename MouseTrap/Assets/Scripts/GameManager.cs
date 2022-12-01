@@ -213,14 +213,9 @@ public class GameManager : MonoBehaviour
 
     public void DecrementLives()
     {
-        if (lives > 1)
-        {
-            lives--;
-        }
-        else
-        {
+        
             GameOver();
-        }
+        
     }
 
     public void QuitGame()
